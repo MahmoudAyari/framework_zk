@@ -1,0 +1,33 @@
+<zk>
+    <window title="UI's technologies based on XML" width="1200px" border="normal"
+            apply="fr.istic.oci.MyViewModel">
+        <hbox align="center" spacing="10px">
+            New Technologie
+            <textbox width="220px"   id="name" />
+            <textbox width="420px"   id="description" />
+             
+            <button id="addBtn" label="Add" />
+        </hbox>
+
+        <listbox style="margin-top: 10px" id="technoList" emptyMessage="No Techno found">
+            <listhead>
+                <listheader align="center" label="Technologie List" />
+                <listheader align="center" label="Remove Technologie" width="20%"/>
+            </listhead>
+        </listbox>
+        <separator spacing="20px" />
+        <div>Technologie  <box>
+            <label id="nameLabel"/>
+            <label id="descriptionLabel"/>
+        </box>
+        </div>
+    </window>
+    <script type="text/javascript" src="/widgets/effects/form_effect/jquery.maskedinput.min.js" />
+    <script type="text/javascript" src="/widgets/effects/form_effect/jquery.watermarkinput.js" />
+    <script type="text/javascript">
+        zk.afterMount(function() {
+            jq("$name").Watermark("Technologie name","gray");
+            jq("$description").Watermark("Technologie description","gray");
+        });
+    </script>
+</zk>

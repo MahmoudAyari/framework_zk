@@ -1,0 +1,38 @@
+Vexi
+
+Description rapide: (5 lignes)
+
+
+The Vexi project is an international effort to create an easy-to-use platform for the development and delivery of Internet application interfaces outside of the standard browser stack. It has similarities with XUL but runs on top of the Java stack, making it browser independent.
+
+
+Etat: (dates de création, ouvert/libre?, maintenu)
+manque de doc. (l'exemple donnée dans le getting started ne marche que sur la version de 2005)
+création :2004
+dernière version : 2010
+dépôt svn : dernier commit il y a 2 jours
+
+
+Plateforme(s):
+juste besoin de java 1.4 (minimum)
+
+Concept et processus général: (compilation, génération de code intermédiaire)
+l'exemple a juste un fichier xml qui est interprété par le jar.
+
+Fonctionnement du controleur: quelle(s) mécanique(s) pour lier la vue au modèle
+
+
+Mapping de données: (eg comment mapper des données vers le XML)
+
+
+Exemple: (eg. partie vue et partie contrôleur)
+
+main.t :
+<vexi xmlns:ui="vexi://ui">
+<ui:box framewidth="800" frameheight="1080">
+<ui:box id="output" text="Click on me!"/>
+Press1 ++= function(v) { $output.text = "Hello World!"; }
+vexi.ui.frame = thisbox;
+</ui:box>
+</vexi>
+

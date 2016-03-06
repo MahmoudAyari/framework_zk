@@ -1,0 +1,121 @@
+FXML 
+
+Description rapide : Avec JavaFX, on peut créer des  interfaces graphique  d’une manière déclarative. L'interface est défini  dans un fichier au format FXML qui sera ensuite chargé dynamiquement dans l'application par le code java. Un fichier FXML est un fichier au format XML dont la syntaxe est conçue pour décrire la vue avec ses composants  prédéfinis.
+
+État : Créer en Octobre 2011 par oracle pour être utiliser en JavaFx 2.x licence GNU GPL, améliorer en java 8.
+
+Plateforme(s): Tous les plateformes
+
+Concept et processus général : Les fichiers fxml sont traduits en fichiers java pour être compilé après.
+
+FXMLLoader.load(getClass().getClassLoader().getResource("Sample.fxml"));
+
+Fonctionnement du contrôleur : 
+Faire les imports nécessaires 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+Relier la vue avec le contrôleur via    fx:controller=”...”
+
+Donner a chaque composant un identificateur    fx:id
+
+
+Mapping de données : via l’annotation @FXML au dessus de chaque composant ou méthode (exemple onClick sur chaque bouton)
+
+
+A l'exécution, le fichier FXML sera chargé par l'application ( classe FXMLLoader ) et un objet Java sera créé ( généralement la racine est un conteneur ) avec les éléments que le fichier décrit ( les composants, conteneurs, graphiques, etc ).
+
+
+Il est possible de créer les fichiers FXML avec un éditeur de texte mais, plus généralement, on utilise un outil graphique ( SceneBuilder ) qui permet de concevoir l'interface de manière conviviale et de générer automatiquement le fichier FXML correspondant.
+
+
+Le fichier XML comporte tout d'abord une partie déclarative ( en-tête et importations nécessaires à la création dynamique de l'objet Java ).
+Ensuite on trouve la description de la structure de l'interface ( graphe de scène avec conteneurs, composants et propriétés ).
+
+
+exemple :
+
+FXML :
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fr.istic.oci.Controller">
+    
+    <Label id="title" fx:id="title" text="" textFill="#0022cc"  />
+    <Button text="Submit" fx:id="btnHello" onAction="#handleButtonAction" />
+    
+</VBox>
+
+
+
+Java :
+
+La classe Main
+
+package fr.istic.oci;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
+}
+
+
+Le contrôleur :
+
+package fr.istic.oci;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+	@FXML
+	private Button btnHello; 
+	 
+	@FXML
+	private Label title;
+	
+	@FXML
+	private void handleButtonAction(ActionEvent event) {
+	title.setText("H e l l o!");
+	title.setTextFill(Color.FUCHSIA);
+	}
+	
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("View is now loaded!");
+    }
+
+}
+
+
+

@@ -1,0 +1,59 @@
+	 	 	 	
+XAML (Extensible Application Markup Language) et WPF
+
+Description rapide: Le XAML est un langage utilisé pour initialiser des objets et données structurés en C#. Ses usages ne sont pas limités à gérer des interfaces graphique mais il est utilisé dans les deux frameworks graphiques principaux de .net : WPF WinForms.
+
+Etat:  	 	 	
+2002 : .net et WinForms
+2006 : WPF et XAML
+Maintenu par Microsoft, en partie open source (le framework .net est en grande partie open source, mais WPF ne l'est pas)
+
+Plateforme(s): Windows pour WPF, Windows/mac/linux pour WinForms et le reste de .net
+
+Concept et processus général:
+Le fichier XAML est compilé en BAML qui est utilisé pour générer une classe partielle en C# avec un attribut lié à chaque élement du BAML.
+
+Fonctionnement du controleur:
+Le controleur est écrit en C#, utilise le binding de donnée pour manipuler la vue. On peut aussi créer des élement programatiquement.
+
+Mapping de données:
+Utilise des méchanisme de binding automatique avec le nom des variable et les attributs du xml. Le controleur dérive de la classe partielle générée à partir du XAML et peut donc accèder à tout ce qui y est déclaré.
+
+
+
+Exemple:
+Crée une application simple (http://www.wpf-tutorial.com/wpf-application/resources/) :
+
+Application.xaml :
+<Window x:Class="WpfTutorialSamples.WPF_Application.ResourceSample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="ResourceSample" Height="150" Width="350"
+        Startup="Application_Startup">
+    <Window.Resources>
+        <sys:String x:Key="strHelloWorld">Hello, world!</sys:String>
+    </Window.Resources>
+    <StackPanel Margin="10">
+        <TextBlock Text="{StaticResource strHelloWorld}" FontSize="56" />
+        <TextBlock>Another "<TextBlock Text="{StaticResource strHelloWorld}" />"</TextBlock>
+    </StackPanel>
+</Window>
+
+App.cs :
+using System;
+using System.Collections.Generic;
+using System.Windows;
+namespace WpfTutorialSamples {
+        public partial class App : Application  {
+                private void Application_Startup(object sender, StartupEventArgs e)  {
+                        // Create the startup window
+                        MainWindow wnd = new MainWindow();
+                        // Do stuff here, e.g. to the window
+                        wnd.Title = "Something else";
+                        // Show the window
+                        wnd.Show();
+                }
+        }
+}
+

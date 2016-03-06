@@ -1,0 +1,82 @@
+MXML
+Morgan Riand, Nicolas Jouneau, David Euzen, Valentin Magrez
+
+
+Description rapide: (5 lignes)
+Le MXML est le langage de description développé par Macromedia, puis repris par Adobe Systems pour la plateforme Adobe Flex. Il est dérivé du XML et permet de décrire la présentation des interfaces utilisées dans le cadre du développement des clients riches ou RIA (Rich Internet Application). 	
+
+
+Etat: (dates de création, ouvert/libre?, maintenu)
+Créé en 2004, maintenu et considéré comme propriété de Adobe à cause de sa liaison étroite avec les technologies d’Adobe.
+
+
+Plateforme(s):
+Adobe
+IDE : ApacheFlex, Flash Builder, IDE + FlexSDK.
+
+
+Concept et processus général: (compilation, génération de code intermédiaire)
+Compilé dynamiquement en swf par un Flex Server ou Flex SDK. Flex compile les tags MXML (la majorité d’entre eux correspondent à des classes ou des propriétés de classes Actionscript 3.0) en un fichier swf qui contient les objets ActionScript correspondant.
+
+
+Fonctionnement du controleur: quelle(s) mécanique(s) pour lier la vue au modèles
+Possible d’utiliser ActionScript et d’importer des composants MXML pour ensuite utiliser leur script et attribut depuis ActionScript.
+
+
+Mapping de données: (eg comment mapper des données vers le XML)
+Tag [Bindable] qui permet d’actualiser un champs dynamiquement dès que la valeur est modifiée. Liaison via du ActionScript ou du script MXML.
+
+Exemple MXML Pur : 
+http://m.migliori.free.fr/tutoFlex/tutoFlex.html
+
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" viewSourceURL="srcview/index.html">
+    <mx:Script>
+        <![CDATA[
+            private function boutonClickHandler():void{
+                txtInput.text="Hello World !";
+            }
+        ]]>
+    </mx:Script>
+    <mx:Button x="127" y="184" label="Cliquez moi!" themeColor="#00FF1E" 
+borderColor="#FF0000" cornerRadius="20" fillAlphas="[1.0, 1.0, 1.0, 0.4]" 
+fillColors="[#AA9F23, #2FAA23]" fontFamily="Georgia" fontStyle="italic" 
+fontSize="15" textAlign="center" textDecoration="normal" color="#41203F" 
+click="boutonClickHandler()"/>
+    <mx:TextInput x="283" y="184" height="28" text="test" fontSize="18" 
+fontWeight="normal" id="txtInput"/>
+</mx:Application>
+
+
+
+Exemple MXML + ActionScript :
+http://www.adobe.com/devnet/flex/quickstarts/building_components_using_code_behind.html
+
+CountryComboBoxSimpleMXML.xml : 
+<?xml version="1.0" encoding="utf-8"?> 
+<s:ComboBox xmlns:fx="http://ns.adobe.com/mxml/2009" 	xmlns:s="library://ns.adobe.com/flex/spark" 	xmlns:mx="library://ns.adobe.com/flex/mx"> 	
+<s:dataProvider> 		
+<s:ArrayList> 			
+<fx:String>United States</fx:String> 			
+<fx:String>United Kingdom</fx:String> 				
+</s:ArrayList> 	
+</s:dataProvider> 
+</s:ComboBox>
+
+AddressFormClass.as: 
+package components { 	
+import components.CountryComboBoxSimpleMXML;
+…
+public class AddressFormClass extends Form {
+	…
+public var country:CountryComboBoxSimpleMXML = new 
+       CountryComboBoxSimpleMXML();
+
+private function submitHandler(event:MouseEvent):void {
+	var addressVO:AddressVO = new AddressVO();
+... 		
+	addressVO.country = country.selectedItem as String;
+}
+}
+}
+

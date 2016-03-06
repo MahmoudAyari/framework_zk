@@ -1,0 +1,37 @@
+	 	 	
+ZK
+Description rapide:
+
+ZK est un framework OpenSource proposant une interaction utilisateur riche. Il est possible de définir des interfaces graphiques via une syntaxe XML, le ZUML (langage de balise, basé sur le standard XUL de Mozilla) plus précisement ou un éditeur WYSIWYG que de manipuler directement des objets java. Il propose l’avantage par rapport à d’autre framework web de ne pas mélanger plusieurs langages de programmation, içi seul le JAVA est utilisé. Ce framework permet de créer des applications selon le modèle MVC.
+
+Etat: La dernière version date de septembre 2014. Le projet est soutenu par la société ZKoss, le framework est open source, cependant pour des projet commerciaux il est payant. 
+
+Plateforme(s): Le framework est cross-plateform. Le langage JAVA est  utilisée pour créer les applications.
+
+Concept et processus général: (compilation, génération de code intermédiaire)
+ZK comporte un mécanisme basé sur AJAX pour automatiser l’interactivité, il contient également un riche ensemble de composant basé sur le langage XUL. 
+Une requête HTTP classique réalisée par un utilisateur depuis le naviguateur web est traité par le ZK Loader. Celui-ci charge les ZK pages et autres composants ZUL, il interprète ces pages en pages HTML et les transmets au navigateur. Une ZK page est écrite à l’aide du langage de balise ZUML. 
+Le ZK Client engine et le ZK AU (Asynchronous Update) Engine travaillent ensemble. Le ZK script est associé à la page web, il permet de traiter les actions utilisateurs. Le ZK client et AU engine assure la mise jour des éléments du DOM en fonction des changements de l’application. C’est aussi appelé modèle de programmation événementiel.
+
+
+
+
+Fonctionnement du controleur: Par l’intermédiaire de la vue, on peut lier le controller de deux manières différentes :
+Si l’on veut une approche MVC qui n’est pas dirigé par la vue alors dans la balise window, il faudra ajouter comme propriété : apply=”myController”.
+Sinon on met alors dans la balise window : apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('myController'). Dans ce cas, nous pouvons accéder aux méthodes ou au model du controller à partir de l’id “vm” (par exemple “vm.toto” accède à l’attribut toto du controller).
+
+Mapping de données: 
+Pour accéder aux données du controller et de son modèle via la vue, il faut comme dis précédemment ajouter la ligne de code la balise window puis accéder aux valeurs via l’id “vm” (par exemple “vm.toto” accède à l’attribut toto du controller).
+Pour accéder aux données de la vue via le controller et de son modèle il faut pour chaque composants de l’ihm définir un id unique puis dans le controller, le nom du composant correspond à l’id, il faut ajouter l’annotation @Wire, et enfin il faut ajouter les accesseurs pour chaques composants (getters et setters).
+
+Exemple: Voir la démo du TODO List. ( https://bitbucket.org/jeremie_goas/oci_zk )
+
+Source:
+
+Site officiel: https://www.zkoss.org/
+Wipédia : https://fr.wikipedia.org/wiki/ZK_(informatique)
+Retour d’expérience sur ZK:
+http://fr.slideshare.net/louschwartz/pre-yajug-retour-experience-zk20versionyajug
+Github Zk framework:
+https://github.com/zkoss
+
